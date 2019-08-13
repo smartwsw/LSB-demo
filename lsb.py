@@ -73,7 +73,10 @@ def main():
     for y in range(source_height):
         for x in range(source_width):
             r, g, b, alpha = qr.get_pixel(x, y)
-            _r, _g, _b, _ = source_pix[(x, y)]
+            try:
+                _r, _g, _b, _ = source_pix[(x, y)]
+            except TypeError:
+                _r, _g, _b = source_pix[(x, y)], source_pix[(x, y)], source_pix[(x, y)]
             _r = (_r & 0xFE) | (r & 1)
             _g = (_g & 0xFE) | (g & 1)
             _b = (_b & 0xFE) | (b & 1)
